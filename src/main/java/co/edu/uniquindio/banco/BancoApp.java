@@ -28,5 +28,5 @@ public class BancoApp extends Application {
 
     public static void main(String[] args) {
         launch(BancoApp.class, args);
-    }
+    }o -
 }
