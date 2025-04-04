@@ -1,12 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Font?>
 
-<VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="co.edu.uniquindio.banco.controlador.PanelClienteControlador"
-      prefHeight="600.0" prefWidth="800.0" spacing="30.0" style="-fx-padding: 30" >
+<VBox prefHeight="523.0" prefWidth="800.0" spacing="20.0" style="-fx-padding: 30; -fx-background-color: #f4f4f4;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.banco.controlador.PanelClienteControlador">
 
+    <children>
+
+        <Text style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-fill: #2c3e50;" text="Panel Principal de Administración" />
+
+    
+        <HBox alignment="CENTER_LEFT" spacing="170.0">
+            <children>
+                <Text style="-fx-font-size: 14px; -fx-fill: #34495e;" text="Bienvenido a su banco, aquí podrá ver sus transacciones." />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nro. de Cuenta : " />
+            </children>
+        </HBox>
+
+        <TableView fx:id="tblPabelCliente" prefHeight="300.0" prefWidth="750.0">
+            <columns>
+                <TableColumn prefWidth="150.0" text="Tipo" />
+                <TableColumn prefWidth="150.0" text="Fecha" />
+                <TableColumn prefWidth="150.0" text="Valor" />
+                <TableColumn prefWidth="150.0" text="Usuario" />
+                <TableColumn prefWidth="150.0" text="Categoría" />
+            </columns>
+        </TableView>
+
+        <!-- Botones -->
+        <HBox alignment="CENTER_LEFT" spacing="15.0">
+            <children>
+                <Button fx:id="btnCerrarSesion" onAction="#cerrarSesionAction" style="-fx-font-size: 14px; -fx-background-color: #e74c3c; -fx-text-fill: white; -fx-padding: 10px 20px;" text="Cerrar Sesión" />
+                <Button fx:id="btnConsultar" onAction="#consultarAction" style="-fx-font-size: 14px; -fx-background-color: #3498db; -fx-text-fill: white; -fx-padding: 10px 20px;" text="Consultar" />
+                <Button fx:id="btnTransferir" onAction="#transferirAction" style="-fx-font-size: 14px; -fx-background-color: #27ae60; -fx-text-fill: white; -fx-padding: 10px 20px;" text="Transferir" />
+                <Button fx:id="btnActualizar" onAction="#actualizarAction" style="-fx-font-size: 14px; -fx-background-color: #f39c12; -fx-text-fill: white; -fx-padding: 10px 20px;" text="Actualizar Datos" />
+            </children>
+        </HBox>
+
+    </children>
 </VBox>

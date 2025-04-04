@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="center" prefHeight="400.0" prefWidth="400.0" spacing="30.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.banco.controlador.RegistroControlador">
+<VBox alignment="center" prefHeight="400.0" prefWidth="400.0" spacing="30.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.banco.controlador.LoginControlador">
    <children>
    
        <Label text="Iniciar Sesión">
@@ -35,7 +35,7 @@
          </rowConstraints>
        </GridPane>
    
-       <Button minHeight="40.0" minWidth="130.0" onAction="#IniciarSesion" style="-fx-background-color: #00807a; -fx-text-fill: white" text="Iniciar Sesión" />
+       <Button fx:id="btnIniciarSesion" minHeight="40.0" minWidth="130.0" onAction="#IniciarSesion" style="-fx-background-color: #00807a; -fx-text-fill: white" text="Iniciar Sesión" />
    </children>
 
 </VBox>
