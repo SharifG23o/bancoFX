@@ -10,14 +10,26 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+
+
 /**
  * Clase que se encarga de gestionar las acciones de la interfaz gráfica del panel del cliente.
- * @author caflorezvi
+ * @author Sharif Giraldo Obando
+ * @author Juan Sebastián Hernández
+ * @author Santiago Ospina Sánchez
  */
 public class PanelClienteControlador {
 
     public Button btnCerrarSesion;
 
+
+
+
+    /**
+     * Método que se encarga de cerrar sesión al oprimir el botón para culminar la
+     * sesión del usuario
+     * @param event
+     */
     public void cerrarSesionAction(ActionEvent event) {
         try {
 
