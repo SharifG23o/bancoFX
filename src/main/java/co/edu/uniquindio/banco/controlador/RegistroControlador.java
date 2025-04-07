@@ -25,14 +25,7 @@ public class RegistroControlador {
     @FXML
     private PasswordField txtPassword;
 
-    private final Banco banco;
-
-    /**
-     * Constructor de la clase, inicializa el banco
-     */
-    public RegistroControlador(){
-        banco = new Banco();
-    }
+    private final Banco banco = Banco.getInstancia();
 
     /**
      * Método que se ejecuta al presionar el botón de registrarse
@@ -41,15 +34,13 @@ public class RegistroControlador {
     public void registrarse(ActionEvent actionEvent) {
 
         try {
-            // Se intenta agregar el usuario al banco
+
             banco.registrarUsuario(
                     txtIdentificacion.getText(),
                     txtNombre.getText(),
                     txtDireccion.getText(),
                     txtCorreo.getText(),
                     txtPassword.getText() );
-
-            // Se muestra un mensaje de éxito y se cierra la ventana
             crearAlerta("Usuario registrado correctamente", Alert.AlertType.INFORMATION);
             cerrarVentana();
 
