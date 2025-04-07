@@ -1,5 +1,8 @@
 package co.edu.uniquindio.banco.controlador;
 
+import co.edu.uniquindio.banco.modelo.entidades.Banco;
+import co.edu.uniquindio.banco.modelo.entidades.BilleteraVirtual;
+import co.edu.uniquindio.banco.modelo.enums.Categoria;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,6 +35,10 @@ public class TransferenciaControlador implements Initializable {
     @FXML
     private ComboBox<String> boxCategoria;
 
+    private final Banco banco = Banco.getInstancia();
+
+    private BilleteraVirtual billeteraVirtual;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         boxCategoria.getItems().addAll(
@@ -44,31 +51,40 @@ public class TransferenciaControlador implements Initializable {
         );
     }
 
-
+    /**
+     * Método que se encarga de realizar las transferencias
+     * @param event evento de acción
+     */
     @FXML
     public void transferirActionBtn(ActionEvent event) {
         try {
-            String cuenta = txtNumeroCuenta.getText();
-            String monto = txtMonto.getText();
-            String categoria = boxCategoria.getValue();
+            String cuentaDestino = txtNumeroCuenta.getText();
+            String montoStr = txtMonto.getText();
+            String categoriaSeleccionada = boxCategoria.getValue();
 
-
-            if (cuenta.isEmpty() || monto.isEmpty() || categoria == null) {
-                Alert alertaError = new Alert(Alert.AlertType.WARNING);
-                alertaError.setTitle("Campos Incompletos");
-                alertaError.setHeaderText(null);
-                alertaError.setContentText("Por favor, complete todos los campos antes de continuar.");
-                alertaError.showAndWait();
+            if (cuentaDestino.isEmpty() || montoStr.isEmpty() || categoriaSeleccionada == null) {
+                mostrarAlerta("Por favor, complete todos los campos antes de continuar.", Alert.AlertType.WARNING);
                 return;
             }
 
+            float monto;
+            try {
+                monto = Float.parseFloat(montoStr);
+                if (monto <= 0) {
+                    throw new NumberFormatException();
+                }
+            } catch (NumberFormatException e) {
+                mostrarAlerta("Ingrese un monto válido mayor a 0.", Alert.AlertType.ERROR);
+                return;
+            }
 
-            Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-            alerta.setTitle("Transferencia Exitosa");
-            alerta.setHeaderText(null);
-            alerta.setContentText("Transferencia realizada correctamente.");
-            alerta.showAndWait();
+            String numeroBilleteraOrigen = billeteraVirtual.getNumero();
 
+            Categoria categoria = Categoria.valueOf(categoriaSeleccionada.toUpperCase());
+
+            banco.realizarTransferencia(numeroBilleteraOrigen, cuentaDestino, monto, categoria);
+
+            mostrarAlerta("Transferencia realizada correctamente.", Alert.AlertType.INFORMATION);
 
             Stage stageActual = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stageActual.close();
@@ -81,9 +97,22 @@ public class TransferenciaControlador implements Initializable {
             nuevoStage.setTitle("Panel Principal");
             nuevoStage.show();
 
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            mostrarAlerta(e.getMessage(), Alert.AlertType.ERROR);
         }
+    }
+
+    /**
+     * Método que se encarga de mostrar una alerta en pantalla
+     * @param mensaje mensaje a mostrar
+     * @param tipo tipo de alerta
+     */
+    public void mostrarAlerta(String mensaje, Alert.AlertType tipo){
+        Alert alert = new Alert(tipo);
+        alert.setTitle("Alerta");
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
     }
 
 }
