@@ -9,6 +9,6 @@ import javafx.event.ActionEvent;
 public class TransferenciaControlador {
 
 
-    public void transferirAction(ActionEvent event) {
+    public void transferirActionBtn(ActionEvent event) {
     }
 }
