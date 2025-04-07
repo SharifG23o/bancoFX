@@ -1,7 +1,9 @@
 package co.edu.uniquindio.banco.controlador;
 
 import co.edu.uniquindio.banco.modelo.entidades.Banco;
+import co.edu.uniquindio.banco.modelo.entidades.Usuario;
 import co.edu.uniquindio.banco.modelo.entidades.BilleteraVirtual;
+import co.edu.uniquindio.banco.modelo.Sesion;
 import co.edu.uniquindio.banco.modelo.enums.Categoria;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -36,8 +38,8 @@ public class TransferenciaControlador implements Initializable {
     private ComboBox<String> boxCategoria;
 
     private final Banco banco = Banco.getInstancia();
+    private final Sesion sesion = Sesion.getInstancia();
 
-    private BilleteraVirtual billeteraVirtual;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -62,6 +64,22 @@ public class TransferenciaControlador implements Initializable {
             String montoStr = txtMonto.getText();
             String categoriaSeleccionada = boxCategoria.getValue();
 
+            Usuario usuarioActual = Sesion.getInstancia().getUsuario();
+
+            if (usuarioActual == null) {
+                mostrarAlerta("No hay usuario logueado.", Alert.AlertType.ERROR);
+                return;
+            }
+
+            BilleteraVirtual billeteraOrigen = banco.buscarBilleteraUsuario(usuarioActual.getId());
+
+            if (billeteraOrigen == null) {
+                mostrarAlerta("No se encontró una billetera asociada al usuario.", Alert.AlertType.ERROR);
+                return;
+            }
+
+            String numeroBilleteraOrigen = billeteraOrigen.getNumero();
+
             if (cuentaDestino.isEmpty() || montoStr.isEmpty() || categoriaSeleccionada == null) {
                 mostrarAlerta("Por favor, complete todos los campos antes de continuar.", Alert.AlertType.WARNING);
                 return;
@@ -77,8 +95,6 @@ public class TransferenciaControlador implements Initializable {
                 mostrarAlerta("Ingrese un monto válido mayor a 0.", Alert.AlertType.ERROR);
                 return;
             }
-
-            String numeroBilleteraOrigen = billeteraVirtual.getNumero();
 
             Categoria categoria = Categoria.valueOf(categoriaSeleccionada.toUpperCase());
 
@@ -101,6 +117,7 @@ public class TransferenciaControlador implements Initializable {
             mostrarAlerta(e.getMessage(), Alert.AlertType.ERROR);
         }
     }
+
 
     /**
      * Método que se encarga de mostrar una alerta en pantalla

@@ -38,7 +38,6 @@ public class LoginControlador {
             Usuario usuario = banco.iniciarSesionUsuario(txtIdentificacion.getText(), txtPassword.getText());
             Sesion sesion = Sesion.getInstancia();
             sesion.setUsuario(usuario);
-            crearAlerta("Se ha iniciado sesión.", Alert.AlertType.INFORMATION);
             navegarVentana("/panelCliente.fxml", "Banco - Panel Principal");
         } catch (Exception e) {
             crearAlerta(e.getMessage(), Alert.AlertType.ERROR);
