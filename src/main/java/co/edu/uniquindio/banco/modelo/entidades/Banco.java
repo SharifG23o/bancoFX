@@ -21,10 +21,11 @@ import java.util.UUID;
 @Setter
 public class Banco {
 
+    public static Banco INSTANCIA;
     private List<Usuario> usuarios;
     private List<BilleteraVirtual> billeteras;
 
-    public Banco(){
+    private Banco(){
         this.usuarios = new ArrayList<>();
         this.billeteras = new ArrayList<>();
     }
@@ -271,5 +272,12 @@ public class Banco {
             throw new Exception("La billetera no existe");
         }
         return billetera.obtenerPorcentajeGastosIngresos(mes, anio);
+    }
+
+    public static Banco getInstancia(){
+        if(INSTANCIA == null){
+            INSTANCIA = new Banco();
+        }
+        return INSTANCIA;
     }
 }
