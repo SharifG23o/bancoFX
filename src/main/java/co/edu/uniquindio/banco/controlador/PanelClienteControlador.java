@@ -6,6 +6,7 @@ import co.edu.uniquindio.banco.modelo.enums.Categoria;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -115,4 +116,25 @@ public class PanelClienteControlador implements Initializable {
     public void actualizarAction(ActionEvent event) {
         
     }
+
+
+
+    @FXML
+    public void abrirVistaRecarga(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/banco/vista/recarga.fxml"));
+            Parent root = loader.load();
+
+            recargaControlador recargaCtrl = loader.getController();
+            recargaCtrl.setBilleteraActual(billeteraActual);
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
