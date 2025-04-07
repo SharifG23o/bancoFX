@@ -1,7 +1,10 @@
 package co.edu.uniquindio.banco.controlador;
 
+import co.edu.uniquindio.banco.modelo.Sesion;
+import co.edu.uniquindio.banco.modelo.entidades.Banco;
 import co.edu.uniquindio.banco.modelo.entidades.BilleteraVirtual;
 import co.edu.uniquindio.banco.modelo.entidades.Transaccion;
+import co.edu.uniquindio.banco.modelo.entidades.Usuario;
 import co.edu.uniquindio.banco.modelo.enums.Categoria;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -38,10 +41,19 @@ public class PanelClienteControlador implements Initializable {
     public Text cuentaTxt;
     public Text bienvenidaClienteTxt;
 
-    private BilleteraVirtual billeteraActual;
+    private final Banco banco = Banco.getInstancia();
+    private final Sesion sesion = Sesion.getInstancia();
+    private Usuario usuario;
+    private BilleteraVirtual billetera;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        initTabla();
+        usuario = sesion.getUsuario();
+        initData(usuario);
+    }
+
+    public void initTabla() {
         colTipo.setCellValueFactory(cellData ->
                 new javafx.beans.property.SimpleStringProperty(cellData.getValue().getTipo().name()));
         colFecha.setCellValueFactory(cellData ->
@@ -54,22 +66,28 @@ public class PanelClienteControlador implements Initializable {
                 new javafx.beans.property.SimpleObjectProperty<>(cellData.getValue().getTipo()));
     }
 
-    public void setBilleteraActual(BilleteraVirtual billetera) {
-        this.billeteraActual = billetera;
+    public void initData(Usuario usuario) {
+        billetera = banco.buscarBilleteraUsuario(usuario.getId());
+        cargarDatosUsuario(billetera);
+        cargarTransacciones(billetera);
+    }
 
-        if (billetera != null && billetera.getUsuario() != null) {
-            String nombre = billetera.getUsuario().getNombre();
-            String numeroCuenta = billetera.getNumero();
+    public void cargarDatosUsuario(BilleteraVirtual billetera) {
+        String nombre = billetera.getUsuario().getNombre();
+        String numeroCuenta = billetera.getNumero();
 
-            cuentaTxt.setText("Nro. de Cuenta : " + numeroCuenta);
-            bienvenidaClienteTxt.setText("Bienvenido/a, " + nombre + ", aquí podrá ver sus transacciones.");
+        bienvenidaClienteTxt.setText("Bienvenido/a, " + nombre + ", aquí podrá ver sus transacciones.");
+        cuentaTxt.setText("Nro. de Cuenta : " + numeroCuenta);
+    }
 
-            cargarTransacciones();
-        }
+    private void cargarTransacciones(BilleteraVirtual billetera) {
+        ObservableList<Transaccion> lista = FXCollections.observableArrayList(billetera.obtenerTransacciones());
+        tblPanelCliente.setItems(lista);
     }
 
     public void cerrarSesionAction(ActionEvent event) {
         try {
+            sesion.cerrarSesion();
             Stage stageActual = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stageActual.close();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/inicio.fxml"));
@@ -86,14 +104,9 @@ public class PanelClienteControlador implements Initializable {
     }
 
     public void consultarAction(ActionEvent event) {
-        cargarTransacciones();
-    }
-
-    private void cargarTransacciones() {
-        if (billeteraActual != null) {
-            ObservableList<Transaccion> lista = FXCollections.observableArrayList(billeteraActual.obtenerTransacciones());
-            tblPanelCliente.setItems(lista);
-        }
+        String nombre = usuario.getNombre();
+        float saldo = billetera.consultarSaldo();
+        crearAlerta(nombre + "tienes un saldo en tu cuenta de " + saldo + "pesos.", Alert.AlertType.INFORMATION);
     }
 
     public void transferirAction(ActionEvent event) {
@@ -114,7 +127,35 @@ public class PanelClienteControlador implements Initializable {
     }
 
     public void actualizarAction(ActionEvent event) {
-        
+        try {
+            Stage stageActual = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stageActual.close();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/registro.fxml"));
+            Parent root = loader.load();
+            RegistroControlador controlador = loader.getController();
+            controlador.actualizarDatos(usuario);
+
+            Stage nuevoStage = new Stage();
+            nuevoStage.setScene(new Scene(root));
+            nuevoStage.setTitle("Actualización de Datos");
+            nuevoStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Método que se encarga de mostrar una alerta en pantalla
+     * @param mensaje mensaje a mostrar
+     * @param tipo tipo de alerta
+     */
+    public void crearAlerta(String mensaje, Alert.AlertType tipo){
+        Alert alert = new Alert(tipo);
+        alert.setTitle("Alerta");
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
     }
 
 
