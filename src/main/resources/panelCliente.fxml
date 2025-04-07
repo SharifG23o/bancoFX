@@ -14,8 +14,8 @@
     
         <HBox alignment="CENTER_LEFT" spacing="170.0">
             <children>
-                <Text style="-fx-font-size: 14px; -fx-fill: #34495e;" text="Bienvenido a su banco, aquí podrá ver sus transacciones." />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nro. de Cuenta : " />
+                <Text fx:id="bienvenidaClienteTxt" style="-fx-font-size: 14px; -fx-fill: #34495e;" text="Bienvenido a su banco, aquí podrá ver sus transacciones." />
+            <Text fx:id="cuentaTxt" strokeType="OUTSIDE" strokeWidth="0.0" text="Nro. de Cuenta : " />
             </children>
         </HBox>
 
