@@ -126,6 +126,23 @@ public class PanelClienteControlador implements Initializable {
         }
     }
 
+    public void recargarAction(ActionEvent event) {
+        try {
+            Stage stageActual = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stageActual.close();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/recarga.fxml"));
+            Parent root = loader.load();
+
+            Stage nuevoStage = new Stage();
+            nuevoStage.setScene(new Scene(root));
+            nuevoStage.setTitle("Recarga");
+            nuevoStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void actualizarAction(ActionEvent event) {
         try {
             Stage stageActual = (Stage) ((Node) event.getSource()).getScene().getWindow();

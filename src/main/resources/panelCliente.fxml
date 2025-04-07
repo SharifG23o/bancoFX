@@ -36,6 +36,7 @@
                 <Button fx:id="btnConsultar" onAction="#consultarAction" style="-fx-font-size: 14px; -fx-background-color: #3498db; -fx-text-fill: white; -fx-padding: 10px 20px;" text="Consultar" />
                 <Button fx:id="btnTransferir" onAction="#transferirAction" style="-fx-font-size: 14px; -fx-background-color: #27ae60; -fx-text-fill: white; -fx-padding: 10px 20px;" text="Transferir" />
                 <Button fx:id="btnActualizar" onAction="#actualizarAction" style="-fx-font-size: 14px; -fx-background-color: #f39c12; -fx-text-fill: white; -fx-padding: 10px 20px;" text="Actualizar Datos" />
+            <Button fx:id="btnRecargar" mnemonicParsing="false" onAction="#recargarAction" prefHeight="40.0" prefWidth="104.0" style="-fx-font-size: 14px; -fx-background-color: #BF9BDE; -fx-text-fill: white;" text="Recargar" />
             </children>
         </HBox>
 
