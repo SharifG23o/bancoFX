@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * Clase que representa un banco con usuarios y billeteras
@@ -71,6 +72,49 @@ public class Banco {
         // Se registra la billetera del usuario
         registrarBilletera(usuario);
     }
+
+    /**
+     * Reemplaza un usuario original por un usuario editado en la lista de usuarios.
+     *
+     * @param original Usuario original a ser reemplazado.
+     * @param editado Usuario con los nuevos datos.
+     */
+    public void reemplazarUsuario(Usuario original, Usuario editado) {
+        usuarios = usuarios.stream()
+                .map(usuario -> usuario.getId().equals(original.getId()) ? editado : usuario)
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    public void editarUsuario(Usuario usuarioAntiguo, String id, String nombre, String direccion, String email, String password) throws Exception {
+        confirmarEditarUsuario(id, nombre, direccion, email, password);
+        Usuario usuarioActualizado = new Usuario(id, nombre, direccion, email, password);
+        if (usuarioAntiguo.getId().equals(usuarioActualizado.getId())) {
+            reemplazarUsuario(usuarioAntiguo, usuarioActualizado);
+        } else if (buscarUsuario(usuarioActualizado.getId()) != null) {
+            throw new IllegalArgumentException("Ya existe un usuario con el mismo id.");
+        } else {
+            reemplazarUsuario(usuarioAntiguo, usuarioActualizado);
+        }
+    }
+
+    public void confirmarEditarUsuario(String id, String nombre, String direccion, String email, String password) throws IllegalArgumentException {
+        if (id == null || id.isEmpty()) {
+            throw new IllegalArgumentException("El id es obligatorio.");
+        }
+        if (nombre == null || nombre.isEmpty()) {
+            throw new IllegalArgumentException("El nombre es obligatorio.");
+        }
+        if (direccion == null || direccion.isEmpty()) {
+            throw new IllegalArgumentException("La direccion es obligatoria.");
+        }
+        if (email == null || email.isEmpty()) {
+            throw new IllegalArgumentException("El email es obligatorio.");
+        }
+        if (password == null || password.isEmpty()) {
+            throw new IllegalArgumentException("La cotraseña es obligatoria.");
+        }
+    }
+
 
     /**
      * Inicia sesión de un usuario buscando en la lista por su ID y contraseña.
