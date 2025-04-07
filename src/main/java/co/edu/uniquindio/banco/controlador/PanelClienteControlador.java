@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.net.URL;
 import java.time.format.DateTimeFormatter;
@@ -55,9 +56,13 @@ public class PanelClienteControlador implements Initializable {
     public void setBilleteraActual(BilleteraVirtual billetera) {
         this.billeteraActual = billetera;
 
-        if (billetera != null) {
-            cuentaTxt.setText("Nro. de Cuenta : " + billetera.getNumero());
-            bienvenidaClienteTxt.setText("Bienvenido " + billetera.getUsuario().getNombre());
+        if (billetera != null && billetera.getUsuario() != null) {
+            String nombre = billetera.getUsuario().getNombre();
+            String numeroCuenta = billetera.getNumero();
+
+            cuentaTxt.setText("Nro. de Cuenta : " + numeroCuenta);
+            bienvenidaClienteTxt.setText("Bienvenido/a, " + nombre + ", aquí podrá ver sus transacciones.");
+
             cargarTransacciones();
         }
     }
@@ -108,7 +113,6 @@ public class PanelClienteControlador implements Initializable {
     }
 
     public void actualizarAction(ActionEvent event) {
-
-
+        
     }
 }
