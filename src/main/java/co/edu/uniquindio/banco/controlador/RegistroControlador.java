@@ -1,12 +1,13 @@
 package co.edu.uniquindio.banco.controlador;
 
 import co.edu.uniquindio.banco.modelo.entidades.Banco;
+import co.edu.uniquindio.banco.modelo.entidades.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
+
+
 
 /**
  * Clase que representa el controlador de la ventana de registro de usuario
@@ -14,6 +15,8 @@ import javafx.stage.Stage;
  */
 public class RegistroControlador {
 
+    @FXML
+    private Label lblTitulo;
     @FXML
     private TextField txtIdentificacion;
     @FXML
@@ -24,28 +27,44 @@ public class RegistroControlador {
     private TextField txtDireccion;
     @FXML
     private PasswordField txtPassword;
+    @FXML
+    private Button registroButton;
 
     private final Banco banco = Banco.getInstancia();
+    private Usuario usuarioAntiguo;
 
     /**
      * Método que se ejecuta al presionar el botón de registrarse
      * @param actionEvent evento de acción
      */
     public void registrarse(ActionEvent actionEvent) {
-        try {
-            banco.registrarUsuario(
-                    txtIdentificacion.getText(),
-                    txtNombre.getText(),
-                    txtDireccion.getText(),
-                    txtCorreo.getText(),
-                    txtPassword.getText() );
-            crearAlerta("Usuario registrado correctamente", Alert.AlertType.INFORMATION);
-            cerrarVentana();
+        realizarRegistro(true);
+    }
 
+    private void realizarRegistro(boolean registro) {
+        try {
+            if (registro) {
+                banco.registrarUsuario(
+                        txtIdentificacion.getText(),
+                        txtNombre.getText(),
+                        txtDireccion.getText(),
+                        txtCorreo.getText(),
+                        txtPassword.getText() );
+                crearAlerta("Usuario registrado correctamente", Alert.AlertType.INFORMATION);
+            } else {
+                banco.editarUsuario(
+                        usuarioAntiguo,
+                        txtIdentificacion.getText(),
+                        txtNombre.getText(),
+                        txtDireccion.getText(),
+                        txtCorreo.getText(),
+                        txtPassword.getText() );
+                crearAlerta("Usuario actualizado correctamente", Alert.AlertType.INFORMATION);
+            }
+            cerrarVentana();
         }catch (Exception e){
             crearAlerta(e.getMessage(), Alert.AlertType.ERROR);
         }
-
     }
 
     /**
@@ -67,5 +86,17 @@ public class RegistroControlador {
     public void cerrarVentana(){
         Stage stage = (Stage) txtIdentificacion.getScene().getWindow();
         stage.close();
+    }
+
+    public void actualizarDatos(Usuario usuario){
+        txtIdentificacion.setText(usuario.getId());
+        txtNombre.setText(usuario.getNombre());
+        txtCorreo.setText(usuario.getEmail());
+        txtDireccion.setText(usuario.getDireccion());
+        txtPassword.setText(usuario.getPassword());
+
+        lblTitulo.setText("Actualización de Datos");
+        registroButton.setText("Actualizar");
+        usuarioAntiguo = usuario;
     }
 }
