@@ -19,13 +19,13 @@
             </children>
         </HBox>
 
-        <TableView fx:id="tblPabelCliente" prefHeight="300.0" prefWidth="750.0">
+        <TableView fx:id="tblPanelCliente" prefHeight="300.0" prefWidth="750.0">
             <columns>
-                <TableColumn prefWidth="150.0" text="Tipo" />
-                <TableColumn prefWidth="150.0" text="Fecha" />
-                <TableColumn prefWidth="150.0" text="Valor" />
-                <TableColumn prefWidth="150.0" text="Usuario" />
-                <TableColumn prefWidth="150.0" text="Categoría" />
+                <TableColumn fx:id="colTipo" prefWidth="150.0" text="Tipo" />
+                <TableColumn fx:id="colFecha" prefWidth="150.0" text="Fecha" />
+                <TableColumn fx:id="colValor" prefWidth="150.0" text="Valor" />
+                <TableColumn fx:id="colUsuario" prefWidth="150.0" text="Usuario" />
+                <TableColumn fx:id="colCategoria" prefWidth="150.0" text="Categoría" />
             </columns>
         </TableView>
 
