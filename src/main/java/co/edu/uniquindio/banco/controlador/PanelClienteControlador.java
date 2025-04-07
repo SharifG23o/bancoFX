@@ -110,7 +110,7 @@ public class PanelClienteControlador implements Initializable {
     public void consultarAction(ActionEvent event) {
         String nombre = usuario.getNombre();
         float saldo = billetera.consultarSaldo();
-        crearAlerta(nombre + "tienes un saldo en tu cuenta de " + saldo + "pesos.", Alert.AlertType.INFORMATION);
+        crearAlerta(nombre + " tienes un saldo en tu cuenta de $" + saldo + " pesos.", Alert.AlertType.INFORMATION);
     }
 
     public void transferirAction(ActionEvent event) {
