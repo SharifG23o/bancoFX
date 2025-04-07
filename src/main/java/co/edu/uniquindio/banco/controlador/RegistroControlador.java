@@ -32,9 +32,7 @@ public class RegistroControlador {
      * @param actionEvent evento de acción
      */
     public void registrarse(ActionEvent actionEvent) {
-
         try {
-
             banco.registrarUsuario(
                     txtIdentificacion.getText(),
                     txtNombre.getText(),
