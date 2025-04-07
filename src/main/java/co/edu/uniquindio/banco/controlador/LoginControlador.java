@@ -17,8 +17,6 @@ import co.edu.uniquindio.banco.controlador.PanelClienteControlador;
 public class LoginControlador {
 
 
-    public Button btnCerrar;
-
     public void IniciarSesion(ActionEvent event) {
 
         navegarVentana("/panelCliente.fxml", "Banco - Panel Principal");
