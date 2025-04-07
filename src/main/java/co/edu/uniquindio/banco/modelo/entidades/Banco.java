@@ -252,7 +252,7 @@ public class Banco {
     public void recargarBilletera(String numeroBiletera, float monto) throws Exception{
         BilleteraVirtual billetera = buscarBilletera(numeroBiletera);
         if(billetera == null){
-            throw new Exception("La billetera no existe");
+            throw new Exception("La billetera no existe.");
         }
 
         Transaccion transaccion = new Transaccion(

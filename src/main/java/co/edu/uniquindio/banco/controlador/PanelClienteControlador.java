@@ -6,6 +6,9 @@ import co.edu.uniquindio.banco.modelo.entidades.BilleteraVirtual;
 import co.edu.uniquindio.banco.modelo.entidades.Transaccion;
 import co.edu.uniquindio.banco.modelo.entidades.Usuario;
 import co.edu.uniquindio.banco.modelo.enums.Categoria;
+import javafx.beans.property.SimpleFloatProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -26,6 +29,7 @@ import java.util.ResourceBundle;
 
 public class PanelClienteControlador implements Initializable {
 
+    public Button btnRecargar;
     public Button btnCerrarSesion;
     public Button btnConsultar;
     public Button btnTransferir;
@@ -55,15 +59,15 @@ public class PanelClienteControlador implements Initializable {
 
     public void initTabla() {
         colTipo.setCellValueFactory(cellData ->
-                new javafx.beans.property.SimpleStringProperty(cellData.getValue().getTipo().name()));
+                new SimpleStringProperty(cellData.getValue().getTipo().name()));
         colFecha.setCellValueFactory(cellData ->
-                new javafx.beans.property.SimpleStringProperty(cellData.getValue().getFecha().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"))));
+                new SimpleStringProperty(cellData.getValue().getFecha().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"))));
         colValor.setCellValueFactory(cellData ->
-                new javafx.beans.property.SimpleFloatProperty(cellData.getValue().getMonto()).asObject());
+                new SimpleFloatProperty(cellData.getValue().getMonto()).asObject());
         colUsuario.setCellValueFactory(cellData ->
-                new javafx.beans.property.SimpleStringProperty(cellData.getValue().getBilleteraOrigen().getUsuario().getNombre()));
+                new SimpleStringProperty(cellData.getValue().getBilleteraOrigen().getUsuario().getNombre()));
         colCategoria.setCellValueFactory(cellData ->
-                new javafx.beans.property.SimpleObjectProperty<>(cellData.getValue().getTipo()));
+                new SimpleObjectProperty<>(cellData.getValue().getTipo()));
     }
 
     public void initData(Usuario usuario) {
@@ -133,9 +137,12 @@ public class PanelClienteControlador implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/recarga.fxml"));
             Parent root = loader.load();
 
+            RecargaControlador controlador = loader.getController();
+            controlador.setBilleteraActual(billetera);
+
             Stage nuevoStage = new Stage();
             nuevoStage.setScene(new Scene(root));
-            nuevoStage.setTitle("Recarga");
+            nuevoStage.setTitle("Recargar Saldo");
             nuevoStage.show();
 
         } catch (IOException e) {
@@ -174,25 +181,4 @@ public class PanelClienteControlador implements Initializable {
         alert.setContentText(mensaje);
         alert.showAndWait();
     }
-
-
-
-    @FXML
-    public void abrirVistaRecarga(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/banco/vista/recarga.fxml"));
-            Parent root = loader.load();
-
-            recargaControlador recargaCtrl = loader.getController();
-            recargaCtrl.setBilleteraActual(billeteraActual);
-
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
 }
