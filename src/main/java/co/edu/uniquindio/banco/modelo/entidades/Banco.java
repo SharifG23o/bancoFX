@@ -72,6 +72,36 @@ public class Banco {
     }
 
     /**
+     * Inicia sesión de un usuario buscando en la lista por su ID y contraseña.
+     *
+     * @param id El identificador del usuario.
+     * @param password La contraseña del usuario.
+     * @return El objeto {@code Usuario} correspondiente si las credenciales son válidas.
+     * @throws Exception Si el ID o la contraseña están vacíos o nulos,
+     *                   o si no se encuentra un usuario con esas credenciales.
+     */
+    public Usuario iniciarSesionUsuario(String id, String password) throws Exception {
+        if (id == null || id.isEmpty()) {
+            throw new Exception("El id es obligatorio");
+        }
+        if (password == null || password.isEmpty()) {
+            throw new Exception("La contraseña es obligatoria");
+        }
+
+        Usuario usuarioBuscado = usuarios.stream()
+                .filter(usuario -> usuario.getId().equals(id)
+                        && usuario.getPassword().equals(password))
+                .findFirst()
+                .orElse(null);
+
+        if (usuarioBuscado == null) {
+            throw new Exception("El usuario no existe");
+        }
+
+        return usuarioBuscado;
+    }
+
+    /**
      * Permite registrar una billetera para un usuario
      * @param usuario usuario al que se le va a registrar la billetera
      */
