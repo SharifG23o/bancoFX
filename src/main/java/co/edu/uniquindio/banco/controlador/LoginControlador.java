@@ -46,6 +46,8 @@ public class LoginControlador {
 
     public void navegarVentana(String nombreArchivoFxml, String tituloVentana) {
         try {
+            Stage stageClose = (Stage) btnIniciarSesion.getScene().getWindow();
+            stageClose.close();
             FXMLLoader loader = new FXMLLoader(getClass().getResource(nombreArchivoFxml));
             Parent root = loader.load();
 

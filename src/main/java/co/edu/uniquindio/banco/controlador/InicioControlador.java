@@ -1,9 +1,11 @@
 package co.edu.uniquindio.banco.controlador;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 /**
@@ -35,7 +37,6 @@ public class InicioControlador {
      */
     public void navegarVentana(String nombreArchivoFxml, String tituloVentana) {
         try {
-
             // Cargar la vista
             FXMLLoader loader = new FXMLLoader(getClass().getResource(nombreArchivoFxml));
             Parent root = loader.load();
