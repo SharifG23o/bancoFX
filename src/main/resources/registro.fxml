@@ -46,7 +46,7 @@
        </GridPane>
    
        <Button fx:id="registroButton" minHeight="40.0" minWidth="130.0" onAction="#registrarse" prefHeight="43.0" prefWidth="130.0" style="-fx-background-color: #00807a; -fx-text-fill: white" text="Registrarse" />
-      <Button fx:id="btnCancelarRegistro" mnemonicParsing="false" onAction="#cancelarRegistroAction" style="-fx-background-color: #FF0000; -fx-text-fill: white;" text="Cancelar Registro" />
+      <Button fx:id="btnCancelarRegistro" mnemonicParsing="false" onAction="#cancelarRegistroAction" prefHeight="92.0" prefWidth="136.0" style="-fx-background-color: #FF0000; -fx-text-fill: white;" text="Cancelar Registro" />
       <HBox prefHeight="100.0" prefWidth="200.0" />
    </children>
 
