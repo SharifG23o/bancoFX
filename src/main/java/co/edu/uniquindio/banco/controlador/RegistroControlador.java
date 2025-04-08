@@ -121,7 +121,7 @@ public class RegistroControlador {
         try {
             Stage stageClose = (Stage) btnCancelarRegistro.getScene().getWindow();
             stageClose.close();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/inicio.fxml")); 
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/inicio.fxml"));
             Parent root = loader.load();
 
             Scene scene = new Scene(root);

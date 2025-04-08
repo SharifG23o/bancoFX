@@ -280,6 +280,10 @@ public class Banco {
             throw new Exception("Saldo insuficiente");
         }
 
+        if(monto <= 0){
+            throw new Exception("Ingrese monto mayor a 0");
+        }
+
         Transaccion transaccion = new Transaccion(
                 UUID.randomUUID().toString(),
                 monto,

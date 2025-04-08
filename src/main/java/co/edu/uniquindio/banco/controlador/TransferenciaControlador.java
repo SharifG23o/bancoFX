@@ -66,16 +66,8 @@ public class TransferenciaControlador implements Initializable {
             String cuentaDestino = txtNumeroCuenta.getText();
             String montoStr = txtMonto.getText();
             String categoriaSeleccionada = boxCategoria.getValue();
-
             Usuario usuarioActual = Sesion.getInstancia().getUsuario();
-
             BilleteraVirtual billeteraOrigen = banco.buscarBilleteraUsuario(usuarioActual.getId());
-
-            if (billeteraOrigen == null) {
-                mostrarAlerta("No se encontró una billetera asociada al usuario.", Alert.AlertType.ERROR);
-                return;
-            }
-
             String numeroBilleteraOrigen = billeteraOrigen.getNumero();
 
             if (cuentaDestino.isEmpty() || montoStr.isEmpty() || categoriaSeleccionada == null) {
@@ -90,14 +82,11 @@ public class TransferenciaControlador implements Initializable {
                     throw new NumberFormatException();
                 }
             } catch (NumberFormatException e) {
-                mostrarAlerta("Ingrese un monto válido mayor a 0.", Alert.AlertType.ERROR);
-                return;
+                mostrarAlerta("Ingrese un monto válido mayor a 0.", Alert.AlertType.ERROR);return;
             }
 
             Categoria categoria = Categoria.valueOf(categoriaSeleccionada.toUpperCase());
-
             banco.realizarTransferencia(numeroBilleteraOrigen, cuentaDestino, monto, categoria);
-
             mostrarAlerta("Transferencia realizada correctamente.", Alert.AlertType.INFORMATION);
 
             Stage stageActual = (Stage) ((Node) event.getSource()).getScene().getWindow();
