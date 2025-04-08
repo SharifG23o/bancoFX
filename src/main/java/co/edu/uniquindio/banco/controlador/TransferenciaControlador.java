@@ -38,7 +38,7 @@ public class TransferenciaControlador implements Initializable {
     @FXML
     private ComboBox<String> boxCategoria;
     @FXML
-    private Button btnCancelarRecarga;
+    private Button btnCancelarTransferencia;
 
     private final Banco banco = Banco.getInstancia();
     private final Sesion sesion = Sesion.getInstancia();
@@ -136,5 +136,21 @@ public class TransferenciaControlador implements Initializable {
     }
 
     public void cancelarTransferenciaAction(ActionEvent event) {
+        try {
+            Stage stageClose = (Stage) btnCancelarTransferencia.getScene().getWindow();
+            stageClose.close();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/panelCliente.fxml"));
+            Parent root = loader.load();
+
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.setTitle("Banco - Panel Principal");
+            stage.show();
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

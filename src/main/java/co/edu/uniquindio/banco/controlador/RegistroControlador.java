@@ -4,6 +4,9 @@ import co.edu.uniquindio.banco.modelo.entidades.Banco;
 import co.edu.uniquindio.banco.modelo.entidades.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
@@ -103,5 +106,21 @@ public class RegistroControlador {
     }
 
     public void cancelarRegistroAction(ActionEvent event) {
+        try {
+            Stage stageClose = (Stage) btnCancelarRegistro.getScene().getWindow();
+            stageClose.close();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/inicio.fxml"));
+            Parent root = loader.load();
+
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.setTitle("Banco - Panel Principal");
+            stage.show();
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
