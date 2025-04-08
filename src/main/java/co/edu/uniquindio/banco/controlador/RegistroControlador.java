@@ -99,4 +99,7 @@ public class RegistroControlador {
         registroButton.setText("Actualizar");
         usuarioAntiguo = usuario;
     }
+
+    public void cancelarRegistroAction(ActionEvent event) {
+    }
 }

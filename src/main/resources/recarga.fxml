@@ -23,9 +23,10 @@
             </ImageView>
          </children>
       </HBox>
-      <HBox alignment="CENTER" prefHeight="73.0" prefWidth="600.0">
+      <HBox alignment="CENTER" prefHeight="73.0" prefWidth="600.0" spacing="10.0">
          <children>
             <Button fx:id="btnAceptarRecarga" alignment="CENTER" mnemonicParsing="false" onAction="#aceptarRecargaAction" style="-fx-background-color: #88DC65; -fx-background-radius: 50px; -fx-border-radius: 50px; -fx-border-width: 2px;" text="Aceptar " />
+            <Button fx:id="btnCancelarRecarga" mnemonicParsing="false" onAction="#cancelarRecargaAction" style="-fx-background-color: #FF0000; -fx-background-radius: 50px; -fx-border-radius: 50px; -fx-border-width: 2px; -fx-text-fill: white;" text="Cancelar " />
          </children>
       </HBox>
    </children>

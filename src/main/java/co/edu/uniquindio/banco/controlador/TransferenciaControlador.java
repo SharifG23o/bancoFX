@@ -132,4 +132,6 @@ public class TransferenciaControlador implements Initializable {
         alert.showAndWait();
     }
 
+    public void cancelarTransferenciaAction(ActionEvent event) {
+    }
 }

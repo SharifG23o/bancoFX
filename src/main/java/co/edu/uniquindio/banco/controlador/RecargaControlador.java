@@ -75,4 +75,7 @@ public class RecargaControlador {
         alert.setContentText(mensaje);
         alert.showAndWait();
     }
+
+    public void cancelarRecargaAction(ActionEvent event) {
+    }
 }

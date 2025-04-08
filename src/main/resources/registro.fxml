@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="center" prefHeight="400.0" prefWidth="400.0" spacing="30.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.banco.controlador.RegistroControlador">
+<VBox alignment="CENTER" prefHeight="400.0" prefWidth="400.0" spacing="30.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.banco.controlador.RegistroControlador">
    <children>
    
        <Label fx:id="lblTitulo" text="Crear nueva cuenta">
@@ -45,7 +45,9 @@
          </rowConstraints>
        </GridPane>
    
-       <Button fx:id="registroButton" minHeight="40.0" minWidth="130.0" onAction="#registrarse" style="-fx-background-color: #00807a; -fx-text-fill: white" text="Registrarse" />
+       <Button fx:id="registroButton" minHeight="40.0" minWidth="130.0" onAction="#registrarse" prefHeight="43.0" prefWidth="130.0" style="-fx-background-color: #00807a; -fx-text-fill: white" text="Registrarse" />
+      <Button fx:id="btnCancelarRegistro" mnemonicParsing="false" onAction="#cancelarRegistroAction" style="-fx-background-color: #FF0000; -fx-text-fill: white;" text="Cancelar Registro" />
+      <HBox prefHeight="100.0" prefWidth="200.0" />
    </children>
 
 </VBox>

@@ -37,5 +37,6 @@
 
        
         <Button fx:id="btnTransferir" onAction="#transferirActionBtn" style="-fx-font-size: 14px; -fx-background-color: #27ae60; -fx-text-fill: white; -fx-padding: 10px 20px;" text="Transferir" />
+      <Button fx:id="btnCancelarTransferencia" onAction="#cancelarTransferenciaAction" style="-fx-font-size: 14px; -fx-background-color: #FF0000; -fx-text-fill: white; -fx-padding: 10px 20px;" text="Transferir" />
     </children>
 </VBox>

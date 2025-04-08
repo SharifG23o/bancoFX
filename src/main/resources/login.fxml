@@ -36,6 +36,7 @@
        </GridPane>
    
        <Button fx:id="btnIniciarSesion" minHeight="40.0" minWidth="130.0" onAction="#IniciarSesion" style="-fx-background-color: #00807a; -fx-text-fill: white" text="Iniciar Sesión" />
+      <Button fx:id="btnCancelarLogin" alignment="CENTER" mnemonicParsing="false" onAction="#cancelarLoginAction" style="-fx-background-color: #FF0000; -fx-background-radius: 50px; -fx-border-radius: 50px; -fx-border-width: 2px; -fx-text-fill: white;" text="Cancelar " />
    </children>
 
 </VBox>

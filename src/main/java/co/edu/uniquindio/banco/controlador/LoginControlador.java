@@ -75,5 +75,8 @@ public class LoginControlador {
         alert.setContentText(mensaje);
         alert.showAndWait();
     }
+
+    public void cancelarLoginAction(ActionEvent event) {
+    }
 }
 
