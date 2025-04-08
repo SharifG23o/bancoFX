@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 
 /**
  * Clase que representa el controlador de la ventana de registro de usuario
- * @author caflorezvi
+ * @author Grupo
  */
 public class RegistroControlador {
 
@@ -104,6 +104,10 @@ public class RegistroControlador {
         stage.close();
     }
 
+    /**
+     * Método que se encarga de actualizar los datos
+     * @param usuario usuario
+     */
     public void actualizarDatos(Usuario usuario){
         txtIdentificacion.setText(usuario.getId());
         txtNombre.setText(usuario.getNombre());
@@ -116,6 +120,10 @@ public class RegistroControlador {
         usuarioAntiguo = usuario;
     }
 
+    /**
+     * Método que se encarga de cancelar el registro
+     * @param event evento de accion
+     */
     @FXML
     public void cancelarRegistroAction(ActionEvent event) {
         try {

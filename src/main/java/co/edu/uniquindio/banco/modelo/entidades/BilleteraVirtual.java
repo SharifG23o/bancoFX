@@ -11,6 +11,12 @@ public class BilleteraVirtual {
     private Usuario usuario;
     private ArrayList<Transaccion> transacciones;
 
+    /**
+     * Constructor de Billetera Virtual
+     * @param numero numero de billetera
+     * @param saldo saldo de la billetera
+     * @param usuario usuario duenio
+     */
     public BilleteraVirtual(String numero, float saldo, Usuario usuario) {
         this.numero = numero;
         this.saldo = saldo;
@@ -18,11 +24,20 @@ public class BilleteraVirtual {
         this.transacciones = new ArrayList<>();
     }
 
+    /**
+     * Permite verificar si la billetera tiene saldo suficiente
+     * @param monto monto necesario
+     */
     public boolean tieneSaldo(float monto) {
         float montoConComision = monto + Constantes.COMISION;
         return saldo >= montoConComision;
     }
 
+    /**
+     * Permite retirar dinero de la billetera
+     * @param monto monto a retirar
+     * @param transaccion transacion en proceso
+     */
     public void retirar(float monto, Transaccion transaccion) throws Exception{
 
         float montoConComision = monto + Constantes.COMISION;
@@ -37,6 +52,11 @@ public class BilleteraVirtual {
         transacciones.add(transaccion);
     }
 
+    /**
+     * Permite depositar dinero en la billetera
+     * @param monto monto a depositar
+     * @param transaccion transacion en proceso
+     */
     public void depositar(float monto, Transaccion transaccion) throws Exception {
 
         if (monto <= 0){
@@ -47,6 +67,11 @@ public class BilleteraVirtual {
         transacciones.add(transaccion);
     }
 
+    /**
+     * Permite obtener transacciones en un periodo de tiempo
+     * @param inicio inicio del periodo
+     * @param fin fin del periodo
+     */
     public ArrayList<Transaccion> obtenerTransaccionesPeriodo(LocalDateTime inicio, LocalDateTime fin) {
 
         ArrayList<Transaccion> transaccionesMes = new ArrayList<>();
@@ -59,6 +84,11 @@ public class BilleteraVirtual {
         return transaccionesMes;
     }
 
+    /**
+     * Permite obtener porcentajes de gatos e ingresos
+     * @param mes mes a evaluar
+     * @param anio anio a evaluar
+     */
     public PorcentajeGastosIngresos obtenerPorcentajeGastosIngresos(int mes, int anio) {
 
         float ingresos = 0;

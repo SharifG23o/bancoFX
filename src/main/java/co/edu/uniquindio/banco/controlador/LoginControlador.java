@@ -19,7 +19,7 @@ import co.edu.uniquindio.banco.controlador.PanelClienteControlador;
 
 /**
  * Clase que representa el controlador de la vista de login
- * @author caflorezvi
+ * @author grupo
  */
 public class LoginControlador {
 
@@ -35,6 +35,10 @@ public class LoginControlador {
     private final Sesion sesion = Sesion.getInstancia();
     private final Banco banco = Banco.getInstancia();
 
+    /**
+     * Método que se encarga de Iniciar Sesion
+     * @param event evento de accion
+     */
     public void IniciarSesion(ActionEvent event) {
         try {
             Usuario usuario = banco.iniciarSesionUsuario(txtIdentificacion.getText(), txtPassword.getText());
@@ -46,6 +50,11 @@ public class LoginControlador {
         }
     }
 
+    /**
+     * Método que se encarga de la navegacion entre ventanas
+     * @param nombreArchivoFxml nombre del view
+     * @param tituloVentana titulo de ls ventana
+     */
     public void navegarVentana(String nombreArchivoFxml, String tituloVentana) {
         try {
             Stage stageClose = (Stage) btnIniciarSesion.getScene().getWindow();
@@ -78,6 +87,10 @@ public class LoginControlador {
         alert.showAndWait();
     }
 
+    /**
+     * Método que se encarga de cancelar el Login
+     * @param event evento de accion
+     */
     public void cancelarLoginAction(ActionEvent event) {
         try {
             Stage stageClose = (Stage) btnCancelarLogin.getScene().getWindow();

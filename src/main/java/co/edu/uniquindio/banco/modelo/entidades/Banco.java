@@ -85,6 +85,16 @@ public class Banco {
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
+    /**
+     * Permite editar los datos de un usuario
+     * @param usuarioAntiguo usuario a editar
+     * @param id id nuevo
+     * @param nombre nuevo nombre
+     * @param direccion nueva direccion
+     * @param email nuevo email
+     * @param password nueva contrasenia
+     * @throws Exception Ya existe un usuario con el mismo id
+     */
     public void editarUsuario(Usuario usuarioAntiguo, String id, String nombre, String direccion, String email, String password) throws Exception {
         confirmarEditarUsuario(id, nombre, direccion, email, password);
         Usuario usuarioActualizado = new Usuario(id, nombre, direccion, email, password);
@@ -97,6 +107,15 @@ public class Banco {
         }
     }
 
+    /**
+     * Permite confirmar la edicion del usuario
+     * @param id id nuevo
+     * @param nombre nuevo nombre
+     * @param direccion nueva direccion
+     * @param email nuevo email
+     * @param password nueva contrasenia
+     * @throws Exception falta de datos
+     */
     public void confirmarEditarUsuario(String id, String nombre, String direccion, String email, String password) throws IllegalArgumentException {
         if (id == null || id.isEmpty()) {
             throw new IllegalArgumentException("El id es obligatorio.");
@@ -268,6 +287,14 @@ public class Banco {
         billetera.depositar(monto, transaccion);
     }
 
+    /**
+     * Permite realizar una transaccion
+     * @param numeroBilleteraOrigen número de la billetera de origen
+     * @param numeroBilleteraDestino numero de billetera de destino
+     * @param monto monto a transferir
+     * @param categoria categoria de la transferencia
+     * @throws Exception si la billetera no existe
+     */
     public void realizarTransferencia(String numeroBilleteraOrigen, String numeroBilleteraDestino, float monto, Categoria categoria) throws Exception{
         BilleteraVirtual billeteraOrigen = buscarBilletera(numeroBilleteraOrigen);
         BilleteraVirtual billeteraDestino = buscarBilletera(numeroBilleteraDestino);
@@ -299,6 +326,10 @@ public class Banco {
 
     }
 
+    /**
+     * Permite obtener la transferencia
+     * @param numeroBilletera número de la billetera
+     */
     public List<Transaccion> obtenerTransacciones(String numeroBilletera){
         BilleteraVirtual billetera = buscarBilletera(numeroBilletera);
         if(billetera != null){
@@ -307,6 +338,12 @@ public class Banco {
         return new ArrayList<>();
     }
 
+    /**
+     * Permite obtener transaccioneas en un periodo de tiempo
+     * @param numeroBilletera número de la billetera
+     * @param inicio fecha de inicio
+     * @param fin fecha de final
+     */
     public List<Transaccion> obtenerTransaccionesPeriodo(String numeroBilletera, LocalDateTime inicio, LocalDateTime fin){
         BilleteraVirtual billetera = buscarBilletera(numeroBilletera);
         if(billetera != null){
@@ -315,6 +352,13 @@ public class Banco {
         return new ArrayList<>();
     }
 
+    /**
+     * Permite obtener el porcentaje de gastos
+     * @param numeroBilletera número de la billetera
+     * @param mes mes a evaluar
+     * @param anio anio a evaluar
+     * @throws Exception si la billetera no existe
+     */
     public PorcentajeGastosIngresos obtenerPorcentajeGastosIngresos(String numeroBilletera, int mes, int anio) throws Exception{
         BilleteraVirtual billetera = buscarBilletera(numeroBilletera);
         if(billetera == null){
@@ -323,6 +367,9 @@ public class Banco {
         return billetera.obtenerPorcentajeGastosIngresos(mes, anio);
     }
 
+    /**
+     * Metodo Get para la instancia
+     */
     public static Banco getInstancia(){
         if(INSTANCIA == null){
             INSTANCIA = new Banco();

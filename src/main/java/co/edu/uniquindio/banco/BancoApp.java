@@ -13,6 +13,10 @@ import javafx.stage.Stage;
  */
 public class BancoApp extends Application {
 
+    /**
+     * Método que se encarga de iniciar el programa
+     * @param stage Stage
+     */
     @Override
     public void start(Stage stage) throws Exception {
 
@@ -26,6 +30,10 @@ public class BancoApp extends Application {
         stage.show();
     }
 
+    /**
+     * Método Main
+     * @param args String
+     */
     public static void main(String[] args) {
         launch(BancoApp.class, args);
     }

@@ -24,7 +24,7 @@ import java.util.ResourceBundle;
 
 /**
  * Clase que se encarga de controlar la creación de transferencias entre billeteras
- * @author caflorezvi
+ * @author Grupo
  */
 public class TransferenciaControlador implements Initializable {
 
@@ -43,7 +43,11 @@ public class TransferenciaControlador implements Initializable {
     private final Banco banco = Banco.getInstancia();
     private final Sesion sesion = Sesion.getInstancia();
 
-
+    /**
+     * Método que se encarga de inicializar
+     * @param location localizacion
+     * @param resources recursos
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         boxCategoria.getItems().addAll(
@@ -119,6 +123,10 @@ public class TransferenciaControlador implements Initializable {
         alert.showAndWait();
     }
 
+    /**
+     * Método que se encarga de cancelar una transferencia
+     * @param event evento de accion
+     */
     public void cancelarTransferenciaAction(ActionEvent event) {
         try {
             Stage stageClose = (Stage) btnCancelarTransferencia.getScene().getWindow();

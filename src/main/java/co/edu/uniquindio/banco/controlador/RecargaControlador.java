@@ -23,6 +23,10 @@ import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 import java.util.UUID;
 
+/**
+ * Clase que se encarga de controlar las recargas de las billeteras
+ * @author caflorezvi
+ */
 public class RecargaControlador {
 
     @FXML
@@ -38,6 +42,10 @@ public class RecargaControlador {
     private BilleteraVirtual billeteraActual;
     private final Banco banco = Banco.getInstancia();
 
+    /**
+     * Método que se encarga de aceptar la recarga
+     * @param event evento de accion
+     */
     @FXML
     void aceptarRecargaAction(ActionEvent event) {
         try {
@@ -53,6 +61,10 @@ public class RecargaControlador {
         }
     }
 
+    /**
+     * Método que se encarga de volver de panel
+     * @param event evento de accion
+     */
     private void volver(ActionEvent event) {
         try {
             Stage stageActual = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -71,6 +83,11 @@ public class RecargaControlador {
         }
     }
 
+    /**
+     * Método que se encarga de mostrar una alerta
+     * @param mensaje mensaje a mostrar
+     * @param tipo tipo de alerta
+     */
     public void crearAlerta(String mensaje, Alert.AlertType tipo){
         Alert alert = new Alert(tipo);
         alert.setTitle("Alerta");
@@ -79,6 +96,10 @@ public class RecargaControlador {
         alert.showAndWait();
     }
 
+    /**
+     * Método que se encarga de cancelar la recarga
+     * @param event evento de accion
+     */
     public void cancelarRecargaAction(ActionEvent event) {
         try {
             Stage stageClose = (Stage) btnCancelarRecarga.getScene().getWindow();
