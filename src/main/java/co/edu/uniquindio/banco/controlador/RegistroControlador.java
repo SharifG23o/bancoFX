@@ -67,10 +67,8 @@ public class RegistroControlador {
                 crearAlerta("Usuario actualizado correctamente", Alert.AlertType.INFORMATION);
             }
 
-            // Cerrar esta ventana
             cerrarVentana();
 
-            // Volver a mostrar la ventana de inicio
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/inicio.fxml"));
             Parent root = loader.load();
 
@@ -123,7 +121,7 @@ public class RegistroControlador {
         try {
             Stage stageClose = (Stage) btnCancelarRegistro.getScene().getWindow();
             stageClose.close();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/inicio.fxml")); // ← antes era panelCliente.fxml
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/inicio.fxml")); 
             Parent root = loader.load();
 
             Scene scene = new Scene(root);
