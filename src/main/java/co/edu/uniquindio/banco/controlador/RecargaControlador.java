@@ -31,6 +31,9 @@ public class RecargaControlador {
     @FXML
     private Button btnAceptarRecarga;
 
+    @FXML
+    private Button btnCancelarRecarga;
+
     @Setter
     private BilleteraVirtual billeteraActual;
     private final Banco banco = Banco.getInstancia();

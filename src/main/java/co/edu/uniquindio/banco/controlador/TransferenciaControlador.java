@@ -13,6 +13,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -36,6 +37,8 @@ public class TransferenciaControlador implements Initializable {
     private TextField txtMonto;
     @FXML
     private ComboBox<String> boxCategoria;
+    @FXML
+    private Button btnCancelarRecarga;
 
     private final Banco banco = Banco.getInstancia();
     private final Sesion sesion = Sesion.getInstancia();

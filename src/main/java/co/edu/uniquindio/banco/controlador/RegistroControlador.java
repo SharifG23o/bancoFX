@@ -29,6 +29,8 @@ public class RegistroControlador {
     private PasswordField txtPassword;
     @FXML
     private Button registroButton;
+    @FXML
+    private Button btnCancelarRegistro;
 
     private final Banco banco = Banco.getInstancia();
     private Usuario usuarioAntiguo;

@@ -29,6 +29,8 @@ public class LoginControlador {
     private TextField txtIdentificacion;
     @FXML
     private PasswordField txtPassword;
+    @FXML
+    private Button btnCancelarLogin;
 
     private final Sesion sesion = Sesion.getInstancia();
     private final Banco banco = Banco.getInstancia();
