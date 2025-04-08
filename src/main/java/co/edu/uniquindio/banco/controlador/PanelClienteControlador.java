@@ -198,10 +198,13 @@ public class PanelClienteControlador implements Initializable {
         try {
             Stage stageActual = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stageActual.close();
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/registro.fxml"));
             Parent root = loader.load();
+
             RegistroControlador controlador = loader.getController();
             controlador.actualizarDatos(usuario);
+            controlador.setEsRegistro(false); // ✅ marcamos que es edición
 
             Stage nuevoStage = new Stage();
             nuevoStage.setScene(new Scene(root));

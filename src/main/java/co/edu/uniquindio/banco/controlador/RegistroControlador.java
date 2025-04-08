@@ -36,7 +36,11 @@ public class RegistroControlador {
     private Button btnCancelarRegistro;
 
     private final Banco banco = Banco.getInstancia();
+    private boolean esActualizacion = false;
     private Usuario usuarioAntiguo;
+    private boolean esRegistro = true;
+
+
 
     /**
      * Método que se ejecuta al presionar el botón de registrarse
@@ -59,11 +63,11 @@ public class RegistroControlador {
             } else {
                 banco.editarUsuario(
                         usuarioAntiguo,
-                        txtIdentificacion.getText(),
-                        txtNombre.getText(),
-                        txtDireccion.getText(),
-                        txtCorreo.getText(),
-                        txtPassword.getText() );
+                        txtIdentificacion.getText().trim(),
+                        txtNombre.getText().trim(),
+                        txtDireccion.getText().trim(),
+                        txtCorreo.getText().trim(),
+                        txtPassword.getText().trim());
                 crearAlerta("Usuario actualizado correctamente", Alert.AlertType.INFORMATION);
             }
 
@@ -109,7 +113,11 @@ public class RegistroControlador {
      * @param usuario usuario
      */
     public void actualizarDatos(Usuario usuario){
+        this.usuarioAntiguo = usuario;
+        this.esActualizacion = true;
+
         txtIdentificacion.setText(usuario.getId());
+        txtIdentificacion.setDisable(true);
         txtNombre.setText(usuario.getNombre());
         txtCorreo.setText(usuario.getEmail());
         txtDireccion.setText(usuario.getDireccion());
@@ -142,5 +150,8 @@ public class RegistroControlador {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    public void setEsRegistro(boolean esRegistro) {
+        this.esRegistro = esRegistro;
     }
 }
