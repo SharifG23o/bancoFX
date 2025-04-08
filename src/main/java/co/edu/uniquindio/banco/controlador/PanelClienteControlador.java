@@ -94,12 +94,12 @@ public class PanelClienteControlador implements Initializable {
             sesion.cerrarSesion();
             Stage stageActual = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stageActual.close();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/inicio.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/login.fxml"));
             Parent root = loader.load();
 
             Stage nuevoStage = new Stage();
             nuevoStage.setScene(new Scene(root));
-            nuevoStage.setTitle("Inicio");
+            nuevoStage.setTitle("Login");
             nuevoStage.show();
 
         } catch (IOException e) {

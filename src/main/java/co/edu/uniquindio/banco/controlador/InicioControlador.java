@@ -19,7 +19,7 @@ public class InicioControlador {
      * @param actionEvent Evento que representa el clic del botón
      */
     public void irIniciarSesion(ActionEvent actionEvent) {
-        navegarVentana("/login.fxml", "Banco - Iniciar Sesión");
+        navegarVentana(actionEvent, "/login.fxml", "Banco - Iniciar Sesión");
     }
 
     /**
@@ -27,7 +27,7 @@ public class InicioControlador {
      * @param actionEvent Evento que representa el clic del botón
      */
     public void irRegistroCliente(ActionEvent actionEvent) {
-        navegarVentana("/registro.fxml", "Banco - Registro de Cliente");
+        navegarVentana(actionEvent, "/registro.fxml", "Banco - Registro de Cliente");
     }
 
     /**
@@ -35,25 +35,25 @@ public class InicioControlador {
      * @param nombreArchivoFxml Nombre del archivo FXML
      * @param tituloVentana Título de la ventana
      */
-    public void navegarVentana(String nombreArchivoFxml, String tituloVentana) {
+    public void navegarVentana(ActionEvent event, String nombreArchivoFxml, String tituloVentana) {
         try {
-            // Cargar la vista
+            // Cerrar ventana actual (Inicio)
+            Stage stageActual = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            stageActual.close();
+
+            // Cargar la nueva vista
             FXMLLoader loader = new FXMLLoader(getClass().getResource(nombreArchivoFxml));
             Parent root = loader.load();
 
-            // Crear la escena
+            // Crear y mostrar nueva ventana
             Scene scene = new Scene(root);
-
-            // Crear un nuevo escenario (ventana)
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.setResizable(false);
             stage.setTitle(tituloVentana);
-
-            // Mostrar la nueva ventana
             stage.show();
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

@@ -69,11 +69,6 @@ public class TransferenciaControlador implements Initializable {
 
             Usuario usuarioActual = Sesion.getInstancia().getUsuario();
 
-            if (usuarioActual == null) {
-                mostrarAlerta("No hay usuario logueado.", Alert.AlertType.ERROR);
-                return;
-            }
-
             BilleteraVirtual billeteraOrigen = banco.buscarBilleteraUsuario(usuarioActual.getId());
 
             if (billeteraOrigen == null) {

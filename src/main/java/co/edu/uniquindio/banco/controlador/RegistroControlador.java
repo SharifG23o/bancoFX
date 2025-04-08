@@ -66,8 +66,21 @@ public class RegistroControlador {
                         txtPassword.getText() );
                 crearAlerta("Usuario actualizado correctamente", Alert.AlertType.INFORMATION);
             }
+
+            // Cerrar esta ventana
             cerrarVentana();
-        }catch (Exception e){
+
+            // Volver a mostrar la ventana de inicio
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/inicio.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setResizable(false);
+            stage.setTitle("Banco - Inicio");
+            stage.show();
+
+        } catch (Exception e){
             crearAlerta(e.getMessage(), Alert.AlertType.ERROR);
         }
     }
@@ -105,21 +118,22 @@ public class RegistroControlador {
         usuarioAntiguo = usuario;
     }
 
+    @FXML
     public void cancelarRegistroAction(ActionEvent event) {
         try {
             Stage stageClose = (Stage) btnCancelarRegistro.getScene().getWindow();
             stageClose.close();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/panelCliente.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/inicio.fxml")); // ← antes era panelCliente.fxml
             Parent root = loader.load();
 
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.setResizable(false);
-            stage.setTitle("Banco - Panel Principal");
+            stage.setTitle("Banco - Inicio");
             stage.show();
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
