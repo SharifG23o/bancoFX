@@ -168,7 +168,7 @@ public class Banco {
         String numero = crearNumeroBilletera();
         BilleteraVirtual billetera = new BilleteraVirtual(numero, 0, usuario);
         billeteras.add(billetera);
-        System.out.println("Cuenta Creada : Numero" + numero + "Usuario" + usuario.getNombre());
+        System.out.println("Cuenta Creada : Numero: " + numero + "Usuario: " + usuario.getNombre());
     }
 
     /**
