@@ -77,6 +77,11 @@ public class RecargaControlador extends Controller implements Initializable {
         navegarVentana(btnCancelarRecarga, "/panelCliente.fxml", "Banco - Panel Principal");
     }
 
+    /**
+     * Método que se encarga de inicializar
+     * @param url url
+     * @param resourceBundle recursos
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Usuario usuario = sesion.getUsuario();

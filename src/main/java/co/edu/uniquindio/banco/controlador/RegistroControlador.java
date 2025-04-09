@@ -44,6 +44,11 @@ public class RegistroControlador extends Controller implements Initializable {
     boolean actualizar;
     boolean cancelar;
 
+    /**
+     * Método que se encarga de inicializar
+     * @param url URL
+     * @param resourceBundle recursos
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if (sesion.getUsuario() != null) {
@@ -74,6 +79,9 @@ public class RegistroControlador extends Controller implements Initializable {
         }
     }
 
+    /**
+     * Método que se encarga de actualizar los datos
+     */
     private void actualizarDatos() {
         try {
             banco.editarUsuario(
@@ -92,7 +100,7 @@ public class RegistroControlador extends Controller implements Initializable {
     }
 
     /**
-     * Método que se encarga de actualizar los datos
+     * Método que se encarga de actualizar la ventana
      * @param usuario usuario
      */
     public void actualizarVentana(Usuario usuario){

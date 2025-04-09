@@ -159,6 +159,10 @@ public class PanelClienteControlador extends Controller implements Initializable
         navegarVentana(btnActualizar, "/registro.fxml", "Banco - Actualización de Datos");
     }
 
+    /**
+     * Método que se encarga de copiar el numero de la cuenta
+     * @param event evento de mouse
+     */
     @FXML
     void copiarNumeroCuenta(MouseEvent event) {
         String textoACopiar = billetera.getNumero();
