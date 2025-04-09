@@ -26,17 +26,16 @@ import java.util.ResourceBundle;
  * Clase que se encarga de controlar la creación de transferencias entre billeteras
  * @author Grupo
  */
-public class TransferenciaControlador implements Initializable {
-
-
+public class TransferenciaControlador extends Controller implements Initializable {
 
     @FXML
     private TextField txtNumeroCuenta;
-
     @FXML
     private TextField txtMonto;
     @FXML
     private ComboBox<String> boxCategoria;
+    @FXML
+    private Button btnTransferir;
     @FXML
     private Button btnCancelarTransferencia;
 
@@ -70,12 +69,12 @@ public class TransferenciaControlador implements Initializable {
             String cuentaDestino = txtNumeroCuenta.getText();
             String montoStr = txtMonto.getText();
             String categoriaSeleccionada = boxCategoria.getValue();
-            Usuario usuarioActual = Sesion.getInstancia().getUsuario();
+            Usuario usuarioActual = sesion.getUsuario();
             BilleteraVirtual billeteraOrigen = banco.buscarBilleteraUsuario(usuarioActual.getId());
             String numeroBilleteraOrigen = billeteraOrigen.getNumero();
 
             if (cuentaDestino.isEmpty() || montoStr.isEmpty() || categoriaSeleccionada == null) {
-                mostrarAlerta("Por favor, complete todos los campos antes de continuar.", Alert.AlertType.WARNING);
+                crearAlerta("Por favor, complete todos los campos antes de continuar.", Alert.AlertType.WARNING);
                 return;
             }
 
@@ -86,41 +85,17 @@ public class TransferenciaControlador implements Initializable {
                     throw new NumberFormatException();
                 }
             } catch (NumberFormatException e) {
-                mostrarAlerta("Ingrese un monto válido mayor a 0.", Alert.AlertType.ERROR);return;
+                crearAlerta("Ingrese un monto válido mayor a 0.", Alert.AlertType.ERROR);return;
             }
 
             Categoria categoria = Categoria.valueOf(categoriaSeleccionada.toUpperCase());
             banco.realizarTransferencia(numeroBilleteraOrigen, cuentaDestino, monto, categoria);
-            mostrarAlerta("Transferencia realizada correctamente.", Alert.AlertType.INFORMATION);
+            crearAlerta("Transferencia realizada correctamente.", Alert.AlertType.INFORMATION);
 
-            Stage stageActual = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stageActual.close();
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/panelCliente.fxml"));
-            Parent root = loader.load();
-
-            Stage nuevoStage = new Stage();
-            nuevoStage.setScene(new Scene(root));
-            nuevoStage.setTitle("Panel Principal");
-            nuevoStage.show();
-
+            navegarVentana(btnTransferir, "/panelCliente.fxml", "Banco - Panel Principal");
         } catch (Exception e) {
-            mostrarAlerta(e.getMessage(), Alert.AlertType.ERROR);
+            crearAlerta(e.getMessage(), Alert.AlertType.ERROR);
         }
-    }
-
-
-    /**
-     * Método que se encarga de mostrar una alerta en pantalla
-     * @param mensaje mensaje a mostrar
-     * @param tipo tipo de alerta
-     */
-    public void mostrarAlerta(String mensaje, Alert.AlertType tipo){
-        Alert alert = new Alert(tipo);
-        alert.setTitle("Alerta");
-        alert.setHeaderText(null);
-        alert.setContentText(mensaje);
-        alert.showAndWait();
     }
 
     /**
@@ -128,21 +103,6 @@ public class TransferenciaControlador implements Initializable {
      * @param event evento de accion
      */
     public void cancelarTransferenciaAction(ActionEvent event) {
-        try {
-            Stage stageClose = (Stage) btnCancelarTransferencia.getScene().getWindow();
-            stageClose.close();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/panelCliente.fxml"));
-            Parent root = loader.load();
-
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.setResizable(false);
-            stage.setTitle("Banco - Panel Principal");
-            stage.show();
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+        navegarVentana(btnCancelarTransferencia, "/panelCliente.fxml", "Banco - Panel Principal");
     }
 }

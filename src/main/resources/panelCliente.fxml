@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
@@ -15,7 +16,16 @@
         <HBox alignment="CENTER_LEFT" spacing="170.0">
             <children>
                 <Text fx:id="bienvenidaClienteTxt" style="-fx-font-size: 14px; -fx-fill: #34495e;" text="Bienvenido a su banco, aquí podrá ver sus transacciones." />
-            <Text fx:id="cuentaTxt" strokeType="OUTSIDE" strokeWidth="0.0" text="Nro. de Cuenta : " />
+            <HBox prefHeight="28.0" prefWidth="61.0">
+               <children>
+                  <Text fx:id="cuentaTxt" strokeType="OUTSIDE" strokeWidth="0.0" text="Nro. de Cuenta : " />
+                  <ImageView fx:id="copiarImage" fitHeight="28.0" fitWidth="32.0" onMouseClicked="#copiarNumeroCuenta" pickOnBounds="true">
+                     <image>
+                        <Image url="@img/copia.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
             </children>
         </HBox>
 

@@ -5,7 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER" prefHeight="350.0" prefWidth="450.0" spacing="20.0" style="-fx-padding: 30; -fx-background-color: #f4f4f4;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.banco.controlador.TransferenciaControlador">
+<VBox alignment="CENTER" prefHeight="310.0" prefWidth="450.0" spacing="20.0" style="-fx-padding: 30; -fx-background-color: #f4f4f4;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.banco.controlador.TransferenciaControlador">
 
     <children>
         <!-- Título -->
@@ -34,6 +34,7 @@
                 <ComboBox fx:id="boxCategoria" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             </children>
         </GridPane>
+      <Label text="*Cada transacción tiene un cargo fijo de $200 pesos" textFill="#909090" />
 
        
         <Button fx:id="btnTransferir" onAction="#transferirActionBtn" style="-fx-font-size: 14px; -fx-background-color: #27ae60; -fx-text-fill: white; -fx-padding: 10px 20px;" text="Transferir" />

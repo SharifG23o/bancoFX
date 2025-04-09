@@ -15,13 +15,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.time.format.DateTimeFormatter;
@@ -31,8 +33,10 @@ import java.util.ResourceBundle;
  * Clase que se encarga de controlar el panel del cliente
  * @author Grupo
  */
-public class PanelClienteControlador implements Initializable {
+public class PanelClienteControlador extends Controller implements Initializable {
 
+    @FXML
+    private ImageView copiarImage;
     public Button btnRecargar;
     public Button btnCerrarSesion;
     public Button btnConsultar;
@@ -118,21 +122,7 @@ public class PanelClienteControlador implements Initializable {
      * @param event evento de accion
      */
     public void cerrarSesionAction(ActionEvent event) {
-        try {
-            sesion.cerrarSesion();
-            Stage stageActual = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stageActual.close();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/login.fxml"));
-            Parent root = loader.load();
-
-            Stage nuevoStage = new Stage();
-            nuevoStage.setScene(new Scene(root));
-            nuevoStage.setTitle("Login");
-            nuevoStage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        navegarVentana(btnCerrarSesion, "/login.fxml", "Banco - Iniciar Sesión");
     }
 
     /**
@@ -150,20 +140,7 @@ public class PanelClienteControlador implements Initializable {
      * @param event evento de accion
      */
     public void transferirAction(ActionEvent event) {
-        try {
-            Stage stageActual = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stageActual.close();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/transferencia.fxml"));
-            Parent root = loader.load();
-
-            Stage nuevoStage = new Stage();
-            nuevoStage.setScene(new Scene(root));
-            nuevoStage.setTitle("Transferencia");
-            nuevoStage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        navegarVentana(btnTransferir, "/transferencia.fxml", "Banco - Realizar Transfericia");
     }
 
     /**
@@ -171,23 +148,7 @@ public class PanelClienteControlador implements Initializable {
      * @param event evento de accion
      */
     public void recargarAction(ActionEvent event) {
-        try {
-            Stage stageActual = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stageActual.close();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/recarga.fxml"));
-            Parent root = loader.load();
-
-            RecargaControlador controlador = loader.getController();
-            controlador.setBilleteraActual(billetera);
-
-            Stage nuevoStage = new Stage();
-            nuevoStage.setScene(new Scene(root));
-            nuevoStage.setTitle("Recargar Saldo");
-            nuevoStage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        navegarVentana(btnRecargar, "/recarga.fxml", "Banco - Recargar Saldo");
     }
 
     /**
@@ -196,36 +157,34 @@ public class PanelClienteControlador implements Initializable {
      */
     public void actualizarAction(ActionEvent event) {
         try {
-            Stage stageActual = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stageActual.close();
+            Stage stageClose = (Stage) btnActualizar.getScene().getWindow();
+            stageClose.close();
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/registro.fxml"));
             Parent root = loader.load();
 
             RegistroControlador controlador = loader.getController();
+            //Es necesario actualizarDatos para inicializar el usuario en Registro
             controlador.actualizarDatos(usuario);
-            controlador.setEsRegistro(false); // ✅ marcamos que es edición
 
-            Stage nuevoStage = new Stage();
-            nuevoStage.setScene(new Scene(root));
-            nuevoStage.setTitle("Actualización de Datos");
-            nuevoStage.show();
-
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.setTitle("Banco - Actualización de Datos");
+            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    /**
-     * Método que se encarga de mostrar una alerta en pantalla
-     * @param mensaje mensaje a mostrar
-     * @param tipo tipo de alerta
-     */
-    public void crearAlerta(String mensaje, Alert.AlertType tipo){
-        Alert alert = new Alert(tipo);
-        alert.setTitle("Alerta");
-        alert.setHeaderText(null);
-        alert.setContentText(mensaje);
-        alert.showAndWait();
+    @FXML
+    void copiarNumeroCuenta(MouseEvent event) {
+        String textoACopiar = billetera.getNumero();
+        Clipboard clipboard = Clipboard.getSystemClipboard();
+        ClipboardContent content = new ClipboardContent();
+        content.putString(textoACopiar);
+        clipboard.setContent(content);
+        crearAlerta("Se ha copiado el Nro de Cuenta en tu portapapeles.", Alert.AlertType.INFORMATION);
     }
 }

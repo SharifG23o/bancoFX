@@ -21,7 +21,7 @@ import co.edu.uniquindio.banco.controlador.PanelClienteControlador;
  * Clase que representa el controlador de la vista de login
  * @author grupo
  */
-public class LoginControlador {
+public class LoginControlador extends Controller{
 
     @FXML
     private Button btnIniciarSesion;
@@ -44,47 +44,10 @@ public class LoginControlador {
             Usuario usuario = banco.iniciarSesionUsuario(txtIdentificacion.getText(), txtPassword.getText());
             Sesion sesion = Sesion.getInstancia();
             sesion.setUsuario(usuario);
-            navegarVentana("/panelCliente.fxml", "Banco - Panel Principal");
+            navegarVentana(btnIniciarSesion, "/panelCliente.fxml", "Banco - Panel Principal");
         } catch (Exception e) {
             crearAlerta(e.getMessage(), Alert.AlertType.ERROR);
         }
-    }
-
-    /**
-     * Método que se encarga de la navegacion entre ventanas
-     * @param nombreArchivoFxml nombre del view
-     * @param tituloVentana titulo de ls ventana
-     */
-    public void navegarVentana(String nombreArchivoFxml, String tituloVentana) {
-        try {
-            Stage stageClose = (Stage) btnIniciarSesion.getScene().getWindow();
-            stageClose.close();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(nombreArchivoFxml));
-            Parent root = loader.load();
-
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.setResizable(false);
-            stage.setTitle(tituloVentana);
-            stage.show();
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Método que se encarga de mostrar una alerta en pantalla
-     * @param mensaje mensaje a mostrar
-     * @param tipo tipo de alerta
-     */
-    public void crearAlerta(String mensaje, Alert.AlertType tipo){
-        Alert alert = new Alert(tipo);
-        alert.setTitle("Alerta");
-        alert.setHeaderText(null);
-        alert.setContentText(mensaje);
-        alert.showAndWait();
     }
 
     /**
@@ -93,18 +56,7 @@ public class LoginControlador {
      */
     public void cancelarLoginAction(ActionEvent event) {
         try {
-            Stage stageClose = (Stage) btnCancelarLogin.getScene().getWindow();
-            stageClose.close();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/inicio.fxml"));
-            Parent root = loader.load();
-
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.setResizable(false);
-            stage.setTitle("Banco - Panel Principal");
-            stage.show();
-
+            navegarVentana(btnCancelarLogin, "/inicio.fxml", "Banco - Inicio");
         }catch (Exception e){
             e.printStackTrace();
         }

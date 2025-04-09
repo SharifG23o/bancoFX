@@ -74,18 +74,6 @@ public class Banco {
     }
 
     /**
-     * Reemplaza un usuario original por un usuario editado en la lista de usuarios.
-     *
-     * @param original Usuario original a ser reemplazado.
-     * @param editado Usuario con los nuevos datos.
-     */
-    public void reemplazarUsuario(Usuario original, Usuario editado) {
-        usuarios = usuarios.stream()
-                .map(usuario -> usuario.getId().equals(original.getId()) ? editado : usuario)
-                .collect(Collectors.toCollection(ArrayList::new));
-    }
-
-    /**
      * Permite editar los datos de un usuario
      * @param usuarioAntiguo usuario a editar
      * @param id id nuevo
@@ -97,13 +85,20 @@ public class Banco {
      */
     public void editarUsuario(Usuario usuarioAntiguo, String id, String nombre, String direccion, String email, String password) throws Exception {
         confirmarEditarUsuario(id, nombre, direccion, email, password);
-        Usuario usuarioActualizado = new Usuario(id, nombre, direccion, email, password);
-        if (usuarioAntiguo.getId().equals(usuarioActualizado.getId())) {
-            reemplazarUsuario(usuarioAntiguo, usuarioActualizado);
-        } else if (buscarUsuario(usuarioActualizado.getId()) != null) {
+        
+        if (usuarioAntiguo.getId().equals(id)) {
+            usuarioAntiguo.setNombre(nombre);
+            usuarioAntiguo.setDireccion(direccion);
+            usuarioAntiguo.setEmail(email);
+            usuarioAntiguo.setPassword(password);
+        } else if (buscarUsuario(id) != null) {
             throw new IllegalArgumentException("Ya existe un usuario con el mismo id.");
         } else {
-            reemplazarUsuario(usuarioAntiguo, usuarioActualizado);
+            usuarioAntiguo.setId(id);
+            usuarioAntiguo.setNombre(nombre);
+            usuarioAntiguo.setDireccion(direccion);
+            usuarioAntiguo.setEmail(email);
+            usuarioAntiguo.setPassword(password);
         }
     }
 

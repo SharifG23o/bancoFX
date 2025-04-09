@@ -12,14 +12,19 @@ import javafx.stage.Stage;
  * Clase que representa el controlador de la vista Inicio
  * @author Grupo
  */
-public class InicioControlador {
+public class InicioControlador extends Controller {
+
+    @FXML
+    private Button sesionbutton;
+    @FXML
+    private Button registrarButton;
 
     /**
      * Método que permite ir a la vista de Iniciar Sesión
      * @param actionEvent Evento que representa el clic del botón
      */
     public void irIniciarSesion(ActionEvent actionEvent) {
-        navegarVentana(actionEvent, "/login.fxml", "Banco - Iniciar Sesión");
+        navegarVentana(sesionbutton, "/login.fxml", "Banco - Iniciar Sesión");
     }
 
     /**
@@ -27,34 +32,6 @@ public class InicioControlador {
      * @param actionEvent Evento que representa el clic del botón
      */
     public void irRegistroCliente(ActionEvent actionEvent) {
-        navegarVentana(actionEvent, "/registro.fxml", "Banco - Registro de Cliente");
-    }
-
-    /**
-     * Método que permite ir a la venana indicada por el nombre del archivo FXML
-     * @param nombreArchivoFxml Nombre del archivo FXML
-     * @param tituloVentana Título de la ventana
-     */
-    public void navegarVentana(ActionEvent event, String nombreArchivoFxml, String tituloVentana) {
-        try {
-            // Cerrar ventana actual (Inicio)
-            Stage stageActual = (Stage) ((Button) event.getSource()).getScene().getWindow();
-            stageActual.close();
-
-            // Cargar la nueva vista
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(nombreArchivoFxml));
-            Parent root = loader.load();
-
-            // Crear y mostrar nueva ventana
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.setResizable(false);
-            stage.setTitle(tituloVentana);
-            stage.show();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        navegarVentana(registrarButton, "/registro.fxml", "Banco - Registro de Cliente");
     }
 }
