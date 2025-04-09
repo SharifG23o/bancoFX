@@ -4,24 +4,17 @@ import co.edu.uniquindio.banco.modelo.Sesion;
 import co.edu.uniquindio.banco.modelo.entidades.Banco;
 import co.edu.uniquindio.banco.modelo.entidades.Usuario;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-import co.edu.uniquindio.banco.controlador.PanelClienteControlador;
-
 
 /**
  * Clase que representa el controlador de la vista de login
  * @author grupo
  */
-public class LoginControlador extends Controller{
+public class LoginControlador extends Controller {
 
     @FXML
     private Button btnIniciarSesion;
@@ -42,7 +35,6 @@ public class LoginControlador extends Controller{
     public void IniciarSesion(ActionEvent event) {
         try {
             Usuario usuario = banco.iniciarSesionUsuario(txtIdentificacion.getText(), txtPassword.getText());
-            Sesion sesion = Sesion.getInstancia();
             sesion.setUsuario(usuario);
             navegarVentana(btnIniciarSesion, "/panelCliente.fxml", "Banco - Panel Principal");
         } catch (Exception e) {
@@ -55,11 +47,7 @@ public class LoginControlador extends Controller{
      * @param event evento de accion
      */
     public void cancelarLoginAction(ActionEvent event) {
-        try {
-            navegarVentana(btnCancelarLogin, "/inicio.fxml", "Banco - Inicio");
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+        navegarVentana(btnCancelarLogin, "/inicio.fxml", "Banco - Inicio");
     }
 }
 

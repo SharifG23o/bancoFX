@@ -6,12 +6,10 @@ import co.edu.uniquindio.banco.modelo.vo.PorcentajeGastosIngresos;
 import co.edu.uniquindio.banco.modelo.vo.SaldoTransaccionesBilletera;
 import lombok.Getter;
 import lombok.Setter;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * Clase que representa un banco con usuarios y billeteras
@@ -26,7 +24,7 @@ public class Banco {
     private List<Usuario> usuarios;
     private List<BilleteraVirtual> billeteras;
 
-    private Banco(){
+    private Banco() {
         this.usuarios = new ArrayList<>();
         this.billeteras = new ArrayList<>();
     }
@@ -365,7 +363,7 @@ public class Banco {
     /**
      * Metodo Get para la instancia
      */
-    public static Banco getInstancia(){
+    public static Banco getInstancia() {
         if(INSTANCIA == null){
             INSTANCIA = new Banco();
         }

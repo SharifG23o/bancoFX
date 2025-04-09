@@ -2,8 +2,6 @@ package co.edu.uniquindio.banco.modelo.entidades;
 
 import co.edu.uniquindio.banco.config.Constantes;
 import co.edu.uniquindio.banco.modelo.vo.PorcentajeGastosIngresos;
-import lombok.Setter;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
