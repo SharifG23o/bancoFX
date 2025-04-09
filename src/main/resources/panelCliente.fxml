@@ -19,7 +19,7 @@
             <HBox prefHeight="28.0" prefWidth="61.0">
                <children>
                   <Text fx:id="cuentaTxt" strokeType="OUTSIDE" strokeWidth="0.0" text="Nro. de Cuenta : " />
-                  <ImageView fx:id="copiarImage" fitHeight="28.0" fitWidth="32.0" onMouseClicked="#copiarNumeroCuenta" pickOnBounds="true">
+                  <ImageView fx:id="copiarImage" fitHeight="21.0" fitWidth="24.0" onMouseClicked="#copiarNumeroCuenta" opacity="0.45" pickOnBounds="true">
                      <image>
                         <Image url="@img/copia.png" />
                      </image>
