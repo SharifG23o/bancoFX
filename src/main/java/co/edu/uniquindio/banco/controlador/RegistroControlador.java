@@ -19,7 +19,7 @@ import java.util.ResourceBundle;
  * Clase que representa el controlador de la ventana de registro de usuario
  * @author Grupo
  */
-public class RegistroControlador extends Controller {
+public class RegistroControlador extends Controller implements Initializable {
 
     @FXML
     private Label lblTitulo;
@@ -43,6 +43,13 @@ public class RegistroControlador extends Controller {
     private Usuario usuarioAntiguo;
     boolean actualizar;
     boolean cancelar;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        if (sesion.getUsuario() != null) {
+            actualizarVentana(sesion.getUsuario());
+        }
+    }
 
     /**
      * Método que se ejecuta al presionar el botón de registrarse
@@ -88,7 +95,7 @@ public class RegistroControlador extends Controller {
      * Método que se encarga de actualizar los datos
      * @param usuario usuario
      */
-    public void actualizarDatos(Usuario usuario){
+    public void actualizarVentana(Usuario usuario){
         this.usuarioAntiguo = usuario;
 
         txtIdentificacion.setText(usuario.getId());

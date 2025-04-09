@@ -156,26 +156,7 @@ public class PanelClienteControlador extends Controller implements Initializable
      * @param event evento de accion
      */
     public void actualizarAction(ActionEvent event) {
-        try {
-            Stage stageClose = (Stage) btnActualizar.getScene().getWindow();
-            stageClose.close();
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/registro.fxml"));
-            Parent root = loader.load();
-
-            RegistroControlador controlador = loader.getController();
-            //Es necesario actualizarDatos para inicializar el usuario en Registro
-            controlador.actualizarDatos(usuario);
-
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.setResizable(false);
-            stage.setTitle("Banco - Actualización de Datos");
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        navegarVentana(btnActualizar, "/registro.fxml", "Banco - Actualización de Datos");
     }
 
     @FXML
